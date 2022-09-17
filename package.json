@@ -1,0 +1,33 @@
+{
+    "name": "monaco",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@codingame/monaco-languageclient-react": "^5.0.2",
+        "@monaco-editor/react": "^4.4.5",
+        "monaco-editor-webpack-plugin": "^7.0.1",
+        "monaco-editor-workers": "^0.34.2",
+        "monaco-languageclient": "^4.0.0",
+        "next": "12.3.0",
+        "next-transpile-modules": "^9.0.0",
+        "normalize-url": "^7.1.0",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "reconnecting-websocket": "^4.4.0",
+        "vscode-ws-jsonrpc": "^2.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "18.7.16",
+        "@types/react": "18.0.19",
+        "@types/react-dom": "18.0.6",
+        "eslint": "8.23.1",
+        "eslint-config-next": "12.3.0",
+        "typescript": "4.8.3"
+    }
+}
