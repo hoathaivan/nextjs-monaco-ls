@@ -1,10 +1,27 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+const withTM = require("next-transpile-modules")([
+    // `monaco-editor` isn't published to npm correctly: it includes both CSS
+    // imports and non-Node friendly syntax, so it needs to be compiled.
+    "monaco-editor",
+]);
+
+module.exports = withTM({
     reactStrictMode: false,
     typescript: {
+        // !! WARN !!
+        // Dangerously allow production builds to successfully complete even if
+        // your project has type errors.
+        // !! WARN !!
         ignoreBuildErrors: true,
     },
-};
+});
+
+// /** @type {import('next').NextConfig} */
+// module.exports = {
+//     reactStrictMode: false,
+//     typescript: {
+//         ignoreBuildErrors: true,
+//     },
+// };
 
 // const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 // const withTM = require("next-transpile-modules")([

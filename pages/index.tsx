@@ -46,44 +46,44 @@ const Home: NextPage = () => {
             };
             return new ReconnectingWebSocket.default(socketUrl, [], socketOptions);
         }
-        // function createLanguageClient(transports: MessageTransports): MonacoLanguageClient {
-        //     return new MonacoLanguageClient({
-        //         name: "Sample Language Client",
-        //         clientOptions: {
-        //             // use a language id as a document selector
-        //             documentSelector: ["python"],
-        //             // disable the default error handler
-        //             errorHandler: {
-        //                 error: () => ({ action: ErrorAction.Continue }),
-        //                 closed: () => ({ action: CloseAction.DoNotRestart }),
-        //             },
-        //         },
-        //         // create a language client connection from the JSON RPC connection on demand
-        //         connectionProvider: {
-        //             get: () => {
-        //                 return Promise.resolve(transports);
-        //             },
-        //         },
-        //     });
-        // }
+        function createLanguageClient(transports: MessageTransports): MonacoLanguageClient {
+            return new MonacoLanguageClient({
+                name: "Sample Language Client",
+                clientOptions: {
+                    // use a language id as a document selector
+                    documentSelector: ["python"],
+                    // disable the default error handler
+                    errorHandler: {
+                        error: () => ({ action: ErrorAction.Continue }),
+                        closed: () => ({ action: CloseAction.DoNotRestart }),
+                    },
+                },
+                // create a language client connection from the JSON RPC connection on demand
+                connectionProvider: {
+                    get: () => {
+                        return Promise.resolve(transports);
+                    },
+                },
+            });
+        }
         // create the web socket
-        const url = createUrl("localhost", 5000, "/");
+        const url = createUrl("localhost", 5000, "/python");
         const webSocket = createWebsocket(url);
-        // webSocket.onopen = () => {
-        //     console.log("Opening Web socket connection");
-        //     const socket = toSocket(webSocket);
-        //     const reader = new WebSocketMessageReader(socket);
-        //     const writer = new WebSocketMessageWriter(socket);
-        //     const languageClient = createLanguageClient({
-        //         reader,
-        //         writer,
-        //     });
-        //     languageClient
-        //         .start()
-        //         .then(() => console.log("language client started"))
-        //         .finally(() => console.log("language client done"));
-        //     reader.onClose(() => languageClient.stop());
-        // };
+        webSocket.onopen = () => {
+            console.log("Opening Web socket connection");
+            const socket = toSocket(webSocket);
+            const reader = new WebSocketMessageReader(socket);
+            const writer = new WebSocketMessageWriter(socket);
+            const languageClient = createLanguageClient({
+                reader,
+                writer,
+            });
+            languageClient
+                .start()
+                .then(() => console.log("language client started"))
+                .finally(() => console.log("language client done"));
+            reader.onClose(() => languageClient.stop());
+        };
     };
 
     const beforeMount = (monaco) => {
